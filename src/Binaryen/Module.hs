@@ -22,7 +22,8 @@ import Data.Word
     Word8,
   )
 import Foreign
-  ( Ptr,
+  ( FunPtr,
+    Ptr,
     Storable,
   )
 import Foreign.C
@@ -39,9 +40,9 @@ foreign import ccall unsafe "BinaryenModuleCreate"
   create ::
     IO Module
 
-foreign import ccall unsafe "BinaryenModuleDispose"
+foreign import ccall unsafe "&BinaryenModuleDispose"
   dispose ::
-    Module -> IO ()
+    FunPtr (Module -> IO ())
 
 foreign import ccall unsafe "BinaryenAddFunction"
   addFunction ::
